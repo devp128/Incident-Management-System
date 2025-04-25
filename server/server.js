@@ -10,10 +10,7 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: [
-    'http://localhost:5173',
-    'https://incident-management-system-mauve.vercel.app/'
-  ],
+  origin: process.env.CORS_ORIGINS.split(','),
   methods: ['GET', 'POST', 'DELETE'],
   credentials: true,
 };
