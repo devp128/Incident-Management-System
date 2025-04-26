@@ -12,9 +12,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from '../api';
 
 function IncidentList() {
   const [incidents, setIncidents] = useState([]);
@@ -25,7 +23,7 @@ function IncidentList() {
   useEffect(() => {
     const fetchIncidents = async () => {
       try {
-        const response = await axios.get(`${API_URL}/incidents`);
+        const response = await api.get('/incidents');
         setIncidents(response.data);
         setLoading(false);
       } catch (err) {

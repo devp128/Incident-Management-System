@@ -13,10 +13,8 @@ import {
   Box,
   Alert,
 } from '@mui/material';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from '../api';
 
 function CreateIncident() {
   const [formData, setFormData] = useState({
@@ -42,7 +40,7 @@ function CreateIncident() {
     setLoading(true);
 
     try {
-      await axios.post(`${API_URL}/incidents`, formData);
+      await api.post('/incidents', formData);
       toast.success('Incident reported successfully!');
       setTimeout(() => {
         navigate('/');

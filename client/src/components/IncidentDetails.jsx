@@ -15,10 +15,8 @@ import {
   DialogContentText,
   DialogActions,
 } from '@mui/material';
-import axios from 'axios';
 import { toast } from 'react-toastify';
-
-const API_URL = import.meta.env.VITE_API_URL;
+import api from '../api';
 
 function IncidentDetails() {
   const { id } = useParams();
@@ -32,7 +30,7 @@ function IncidentDetails() {
   useEffect(() => {
     const fetchIncident = async () => {
       try {
-        const response = await axios.get(`${API_URL}/incidents/${id}`);
+        const response = await api.get(`/incidents/${id}`);
         setIncident(response.data);
         setLoading(false);
       } catch (err) {
@@ -48,7 +46,7 @@ function IncidentDetails() {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await axios.delete(`${API_URL}/incidents/${id}`);
+      await api.delete(`/incidents/${id}`);
       toast.success('Incident deleted successfully!');
       navigate('/');
     } catch (err) {

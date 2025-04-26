@@ -10,12 +10,20 @@ const app = express();
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.CORS_ORIGINS.split(','),
-  methods: ['GET', 'POST', 'DELETE'],
+  origin: ['http://localhost:5173', 'https://incident-management-system-mauve.vercel.app'],
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
   credentials: true,
+  maxAge: 600, // Cache preflight request for 10 minutes
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
+// Apply CORS middleware before other middleware
 app.use(cors(corsOptions));
+
+// Parse JSON bodies
 app.use(express.json());
 
 // Routes
